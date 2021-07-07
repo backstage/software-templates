@@ -52,26 +52,26 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
-          component_id: '${{ parameters.component_id }}'
-          description: '${{ parameters.description }}'
-          destination: '${{ parseRepoUrl parameters.repoUrl }}'
-          owner: '${{ parameters.owner }}'
+          component_id: '{{ parameters.component_id }}'
+          description: '{{ parameters.description }}'
+          destination: '{{ parseRepoUrl parameters.repoUrl }}'
+          owner: '{{ parameters.owner }}'
 
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: 'This is ${{ parameters.component_id }}'
-        repoUrl: '${{ parameters.repoUrl }}'
+        description: 'This is {{ parameters.component_id }}'
+        repoUrl: '{{ parameters.repoUrl }}'
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '${{ steps.publish.output.repoContentsUrl }}'
+        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: '/catalog-info.yaml'
 
   output:
-    remoteUrl: '${{ steps.publish.output.remoteUrl }}'
-    entityRef: '${{ steps.register.output.entityRef }}'
+    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
+    entityRef: '{{ steps.register.output.entityRef }}'
