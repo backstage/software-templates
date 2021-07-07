@@ -1,5 +1,5 @@
 {
-  "name": "{{cookiecutter.component_id}}",
+  "name": "${{values.component_id}}",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
