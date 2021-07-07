@@ -1,6 +1,6 @@
-## {{ cookiecutter.name }}
+## ${{ values.name }}
 
-{{ cookiecutter.description }}
+${{ values.description }}
 
 ## Getting started
 

@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: {{cookiecutter.name | jsonify}}
-  description: {{cookiecutter.description | jsonify}}
+  name: ${{values.name | dump}}
+  description: ${{values.description | dump}}
   annotations:
-    github.com/project-slug: {{cookiecutter.destination.owner + "/" + cookiecutter.destination.repo}}
-    backstage.io/techdocs-ref: url:{{"https://" + cookiecutter.destination.host + "/" + cookiecutter.destination.owner + "/" + cookiecutter.destination.repo}}
+    github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
+    backstage.io/techdocs-ref: url:${{"https://" + values.destination.host + "/" + values.destination.owner + "/" + values.destination.repo}}
 spec:
   type: documentation
   lifecycle: experimental
-  owner: {{cookiecutter.owner | jsonify}}
+  owner: ${{values.owner | dump}}
