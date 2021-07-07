@@ -1,5 +1,5 @@
-site_name: {{cookiecutter.component_id | jsonify}}
-site_description: {{cookiecutter.description | jsonify}}
+site_name: ${{values.component_id | dump}}
+site_description: ${{values.description | dump}}
 
 nav:
   - Introduction: index.md

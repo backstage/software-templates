@@ -1,4 +1,4 @@
-package com.example.{{cookiecutter.java_package_name}};
+package com.example.${{values.java_package_name}};
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

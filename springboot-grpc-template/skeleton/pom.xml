@@ -11,12 +11,12 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>{{cookiecutter.artifact_id}}</artifactId>
+    <artifactId>${{values.artifact_id}}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>{{cookiecutter.artifact_id}}</name>
-    <description>{{cookiecutter.description}}</description>
+    <name>${{values.artifact_id}}</name>
+    <description>${{values.description}}</description>
 
     <properties>
         <java.version>11</java.version>

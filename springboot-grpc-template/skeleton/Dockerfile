@@ -1,5 +1,5 @@
 FROM openjdk:11-alpine
-ENTRYPOINT ["/usr/bin/{{cookiecutter.artifact_id}}.sh"]
+ENTRYPOINT ["/usr/bin/${{values.artifact_id}}.sh"]
 
-COPY {{cookiecutter.artifact_id}}.sh /usr/bin/{{cookiecutter.artifact_id}}.sh
-COPY target/{{cookiecutter.artifact_id}}.jar /usr/share/{{cookiecutter.artifact_id}}/{{cookiecutter.artifact_id}}.jar
+COPY ${{values.artifact_id}}.sh /usr/bin/${{values.artifact_id}}.sh
+COPY target/${{values.artifact_id}}.jar /usr/share/${{values.artifact_id}}/${{values.artifact_id}}.jar

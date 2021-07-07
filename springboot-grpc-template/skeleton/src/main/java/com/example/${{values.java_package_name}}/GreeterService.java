@@ -1,7 +1,7 @@
-package com.example.{{cookiecutter.java_package_name}};
+package com.example.${{values.java_package_name}};
 
-import com.example.{{cookiecutter.java_package_name}}.proto.GreeterGrpc;
-import com.example.{{cookiecutter.java_package_name}}.proto.GreeterOuterClass;
+import com.example.${{values.java_package_name}}.proto.GreeterGrpc;
+import com.example.${{values.java_package_name}}.proto.GreeterOuterClass;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 
