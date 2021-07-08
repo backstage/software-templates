@@ -4,7 +4,7 @@ This repository is a collection of software and documentation templates for the 
 
 ## scaffolder-templates
 
-[Backstage Software Templates](https://backstage.io/docs/features/software-templates/) are used to create new software components through Backstage. These templates are intended as a starting point to build on for different use cases. You may also use them as provided, but we recommend pointing your Backstage app to a forked copy because the templates aren't versioned at this time.
+[Backstage Software Templates](https://backstage.io/docs/features/software-templates/) are used to create new software components through Backstage. These templates are intended as a starting point to build on for different use cases. You may also use them as provided, but we recommend pointing your Backstage app to a forked copy because the templates aren't versioned at this time, and as such breaking changes can happen without warning.
 
 ## documentation-templates
 
