@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{values.name | dump}}
+  github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
+spec:
+  type: website
+  lifecycle: experimental
+  owner: ${{values.owner | dump}}
+{%- if 'system' in values %}
+  system: ${{ values.system | dump }}
+{%- endif %}
