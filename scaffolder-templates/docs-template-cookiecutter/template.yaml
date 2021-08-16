@@ -1,13 +1,13 @@
 apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
-  name: docs-template
-  title: Documentation Template
-  description: Create a new standalone documentation project
+  name: docs-template-cookiecutter
+  title: Documentation Template (Cookiecutter)
+  description: Create a new standalone documentation project using Cookiecutter
   tags:
-    - recommended
     - techdocs
     - mkdocs
+    - cookiecutter
 spec:
   owner: backstage/techdocs-core
   type: documentation
@@ -51,13 +51,13 @@ spec:
             allowedHosts:
               - github.com
 
-  # This template is meant to be used on top of an existing template.
+  # This template can be used on top of an existing software template to add docs.
   # By adding the following and fetching from an absolute URL you can
   # add in the docs template
   steps:
     - id: fetch
       name: Template Docs Skeleton
-      action: fetch:template
+      action: fetch:cookiecutter
       input:
         url: ./skeleton
         values:
