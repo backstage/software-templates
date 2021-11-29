@@ -44,9 +44,9 @@ spec:
             allowedHosts:
               - gitlab.com
   steps:
-    - id: fetch-base
-      name: Fetch Base
-      action: fetch:cookiecutter
+    - id: template
+      name: Fetch Skeleton + Template
+      action: fetch:template
       input:
         url: ./template
         targetPath: '{{ parameters.targetPath }}'
