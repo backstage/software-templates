@@ -32,6 +32,10 @@ spec:
           title: Target Path in repo
           type: string
           description: Name of the directory to create in the repository
+        branchName:
+          title: Destination Branch Name
+          type: string
+          description: Name of the branch to create in the repository
     - title: Choose a location
       required:
         - repoUrl
@@ -55,12 +59,12 @@ spec:
 
     - id: publish
       name: Publish
-      action: publish:gitlab-merge-request
+      action: publish:gitlab:merge-request
       input:
         repoUrl: '{{ parameters.repoUrl }}'
         projectid: '{{ parameters.gitlab_project_id }}'
         title: 'Create new project: {{parameters.name}}'
-        branchName: 'create-{{parameters.name}}'
+        branchName: '{{ parameters.branchName }}'
         description: |
           # New project: {{parameters.name}}
 
