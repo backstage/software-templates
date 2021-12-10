@@ -1,4 +1,4 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: docs-template
@@ -61,26 +61,26 @@ spec:
       input:
         url: ./skeleton
         values:
-          name: "{{ parameters.name }}"
-          description: "{{ parameters.description }}"
-          destination: "{{ parseRepoUrl parameters.repoUrl }}"
-          owner: "{{ parameters.owner }}"
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
 
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ["github.com"]
-        description: "This is {{ parameters.component_id }}"
-        repoUrl: "{{ parameters.repoUrl }}"
+        description: This is ${{ parameters.component_id }}
+        repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: "{{ steps.publish.output.repoContentsUrl }}"
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
 
   output:
-    remoteUrl: "{{ steps.publish.output.remoteUrl }}"
-    entityRef: "{{ steps.register.output.entityRef }}"
+    remoteUrl: ${{ steps.publish.output.remoteUrl }}
+    entityRef: ${{ steps.register.output.entityRef }}
