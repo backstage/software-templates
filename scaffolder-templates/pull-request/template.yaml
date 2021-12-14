@@ -1,9 +1,9 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: pull-request
   title: Pull Request Action template
-  description: scaffolder v1beta2 template demo publishing to PR on existing git repository
+  description: scaffolder v1beta3 template demo publishing to PR on existing git repository
 spec:
   owner: backstage/techdocs-core
   type: service
@@ -47,7 +47,7 @@ spec:
       input:
         url: ./template
         values:
-          name: '{{parameters.name}}'
+          name: ${{parameters.name}}
 
     - id: fetch-docs
       name: Fetch Docs
@@ -60,18 +60,16 @@ spec:
       name: Publish
       action: publish:github:pull-request
       input:
-        repoUrl: '{{ parameters.repoUrl }}'
-        title: 'Create new project: {{parameters.name}}'
-        branchName: 'create-{{parameters.name}}'
+        repoUrl: ${{ parameters.repoUrl }}
+        title: "Create new project: ${{parameters.name}}"
+        branchName: create-${{parameters.name}}
         description: |
-          # New project: {{parameters.name}}
+          # New project: ${{parameters.name}}
 
-          {{#if parameters.description}}
-          {{parameters.description}}
-          {{/if}}
-        targetPath: '{{#if parameters.targetPath}}{{parameters.targetPath}}{{else}}{{parameters.name}}{{/if}}'
+          ${{ parameters.description if parameters.description else "" }}
+        targetPath: ${{ parameters.targetPath if parameters.targetPath else parameters.name }}
 
   output:
-    links: 
-      - url: '{{steps.publish.output.remoteUrl}}'
-        text: 'Go to PR'
+    links:
+      - url: ${{steps.publish.output.remoteUrl}}
+        text: "Go to PR"

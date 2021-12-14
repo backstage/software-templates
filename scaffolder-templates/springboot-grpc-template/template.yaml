@@ -1,4 +1,4 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: springboot-template
@@ -11,7 +11,7 @@ metadata:
 spec:
   owner: service@example.com
   type: service
-  
+
   parameters:
     - title: Provide some simple information
       required:
@@ -37,12 +37,12 @@ spec:
           description: Owner of the component
           ui:field: OwnerPicker
           ui:options:
-            allowedKinds: 
+            allowedKinds:
               - Group
-    - title: Choose a location  
+    - title: Choose a location
       required:
         - repoUrl
-      properties: 
+      properties:
         repoUrl:
           title: Repository Location
           type: string
@@ -60,29 +60,29 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
-          component_id: '{{ parameters.component_id }}'
-          description: '{{ parameters.description }}'
-          artifact_id: '{{ parameters.component_id }}'
-          java_package_name: '{{ parameters.java_package_name }}'
-          owner: '{{ parameters.owner }}'
-          destination: '{{ parseRepoUrl parameters.repoUrl }}'
+          component_id: ${{ parameters.component_id }}
+          description: ${{ parameters.description }}
+          artifact_id: ${{ parameters.component_id }}
+          java_package_name: ${{ parameters.java_package_name }}
+          owner: ${{ parameters.owner }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
           http_port: 8080
 
     - id: publish
       name: Publish
       action: publish:github
       input:
-        allowedHosts: ['github.com']
-        description: 'This is {{ parameters.component_id }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.component_id }}
+        repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
 
   output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
+    remoteUrl: ${{ steps.publish.output.remoteUrl }}
+    entityRef: ${{ steps.register.output.entityRef }}
