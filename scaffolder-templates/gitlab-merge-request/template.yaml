@@ -24,10 +24,10 @@ spec:
           title: Description
           type: string
           description: Description of the component
-        gitlab_project_id:
-          title: Gitlab Project ID
+        gitlab_project:
+          title: Gitlab Project Slug or ID
           type: string
-          description: 'Provide your Gitlab Project ID #1234'
+          description: 'Provide your Gitlab Project slug "gitlab-com/www-gitlab-com" or Project ID "7764"'
         targetPath:
           title: Target Path in repo
           type: string
@@ -47,23 +47,23 @@ spec:
           ui:options:
             allowedHosts:
               - gitlab.com
+
   steps:
-    - id: template
-      name: Fetch Skeleton + Template
+    - id: fetch-base
+      name: Fetch Base
       action: fetch:template
       input:
         url: ./template
         targetPath: '{{ parameters.targetPath }}'
         values:
           name: '{{parameters.name}}'
-
     - id: publish
       name: Publish
       action: publish:gitlab:merge-request
       input:
         repoUrl: '{{ parameters.repoUrl }}'
         projectid: '{{ parameters.gitlab_project_id }}'
-        title: 'Create new project: {{parameters.name}}'
+        title: 'Creating catalog-info.yaml {{parameters.name}} for backstage'
         branchName: '{{ parameters.branchName }}'
         description: |
           # New project: {{parameters.name}}
@@ -71,9 +71,9 @@ spec:
           {{#if parameters.description}}
           {{parameters.description}}
           {{/if}}
-        targetPath: '{{#if parameters.targetPath}}{{parameters.targetPath}}{{else}}{{parameters.name}}{{/if}}'
+        targetPath: '{{#if parameters.targetPath}}{{parameters.targetPath}}{{else}}.{{/if}}'
 
   output:
-    links:
+    links: 
       - url: '{{steps.publish.output.mergeRequestUrl}}'
         text: 'Go to Gitlab MR'
