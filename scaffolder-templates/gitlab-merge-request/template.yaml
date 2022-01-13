@@ -62,7 +62,7 @@ spec:
       action: publish:gitlab:merge-request
       input:
         repoUrl: '{{ parameters.repoUrl }}'
-        projectid: '{{ parameters.gitlab_project_id }}'
+        projectid: '{{ parameters.gitlab_project }}'
         title: 'Creating catalog-info.yaml {{parameters.name}} for backstage'
         branchName: '{{ parameters.branchName }}'
         description: |
