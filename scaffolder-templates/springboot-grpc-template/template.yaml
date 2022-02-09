@@ -31,6 +31,7 @@ spec:
           title: Description
           type: string
           description: Help others understand what this website is for.
+          default: ''
         owner:
           title: Owner
           type: string
