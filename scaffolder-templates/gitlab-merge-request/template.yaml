@@ -1,4 +1,4 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: gitlab-merge-request
@@ -54,26 +54,24 @@ spec:
       action: fetch:template
       input:
         url: ./template
-        targetPath: '{{ parameters.targetPath }}'
+        targetPath: ${{ parameters.targetPath }}
         values:
-          name: '{{parameters.name}}'
+          name: ${{parameters.name}}
     - id: publish
       name: Publish
       action: publish:gitlab:merge-request
       input:
-        repoUrl: '{{ parameters.repoUrl }}'
-        projectid: '{{ parameters.gitlab_project }}'
-        title: 'Creating catalog-info.yaml {{parameters.name}} for backstage'
-        branchName: '{{ parameters.branchName }}'
+        repoUrl: ${{ parameters.repoUrl }}
+        projectid: ${{ parameters.gitlab_project }}
+        title: Creating catalog-info.yaml ${{ parameters.name }} for backstage
+        branchName: ${{ parameters.branchName }}
         description: |
-          # New project: {{parameters.name}}
+          # New project: ${{ parameters.name }}
 
-          {{#if parameters.description}}
-          {{parameters.description}}
-          {{/if}}
-        targetPath: '{{#if parameters.targetPath}}{{parameters.targetPath}}{{else}}.{{/if}}'
+          ${{ parameters.description if parameters.description }}
+        targetPath: ${{ parameters.targetPath if parameters.targetPath else '.' }}
 
   output:
     links: 
-      - url: '{{steps.publish.output.mergeRequestUrl}}'
+      - url: ${{ steps.publish.output.mergeRequestUrl }}
         text: 'Go to Gitlab MR'
