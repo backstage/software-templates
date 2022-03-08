@@ -65,7 +65,7 @@ spec:
         description: |
           # New project: ${{parameters.name}}
 
-          ${{ parameters.description if parameters.description else "" }}
+          ${{ parameters.description if parameters.description }}
         targetPath: ${{ parameters.targetPath if parameters.targetPath else parameters.name }}
 
   output:
