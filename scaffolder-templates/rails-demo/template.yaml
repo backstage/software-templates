@@ -142,7 +142,7 @@ spec:
             owner: ${{ parameters.owner }}
 
     - id: publish
-      if: ${{ not parameters.dryRun }}
+      if: ${{ parameters.dryRun !== true }}
       name: Publish
       action: publish:github
       input:
@@ -152,7 +152,7 @@ spec:
         repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
-      if: ${{ not parameters.dryRun }}
+      if: ${{ parameters.dryRun !== true }}
       name: Register
       action: catalog:register
       input:
