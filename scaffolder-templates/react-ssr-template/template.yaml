@@ -8,7 +8,7 @@ metadata:
     - recommended
     - react
 spec:
-  owner: web@example.com
+  owner: ioasys
   type: website
   parameters:
     - title: Provide some simple information
@@ -17,18 +17,18 @@ spec:
         - owner
       properties:
         component_id:
-          title: Name
+          title: Nome
           type: string
-          description: Unique name of the component
+          description: Forneça um nome unico que será usado
           ui:field: EntityNamePicker
         description:
-          title: Description
+          title: Descrição
           type: string
-          description: Help others understand what this website is for.
+          description: Ajude a descrever qual o intuito desse projeto.
         owner:
-          title: Owner
+          title: A quem pertence ?
           type: string
-          description: Owner of the component
+          description: Mantenedor do projeto
           ui:field: OwnerPicker
           ui:options:
             allowedKinds:
@@ -43,7 +43,8 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - github.com
+              - bitbucket.org
+              - server.bitbucket.com
   steps:
     - id: template
       name: Fetch Skeleton + Template
@@ -60,10 +61,9 @@ spec:
 
     - id: publish
       name: Publish
-      action: publish:github
+      action: publish:bitbucket
       input:
-        allowedHosts: ["github.com"]
-        description: This is ${{ parameters.component_id }}
+        description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
 
     - id: register
