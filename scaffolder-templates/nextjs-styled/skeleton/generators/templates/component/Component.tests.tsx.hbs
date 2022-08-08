@@ -1,0 +1,27 @@
+import * as React from 'react'
+import { render, screen } from '@testing-library/react'
+import { ThemeProvider } from 'styled-components'
+import { theme } from '@/styles/themes/main'
+import { {{pascalCase name}} } from '../{{pascalCase name}}'
+
+type WrapperProps = {
+  children: React.ReactNode
+}
+
+function Wrapper({ children }: WrapperProps) {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+}
+
+describe('<{{pascalCase name}} />', () => {
+  it('should be able to render the component', () => {
+    render(
+      <Wrapper>
+        <{{pascalCase name}} />
+      </Wrapper>,
+    )
+
+    const message = screen.getByText(/{{pascalCase name}}/i)
+
+    expect(message).toBeInTheDocument()
+  })
+})
