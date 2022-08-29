@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: gitlab-merge-request
   title: GitLab Merge Request Action template
-  description: scaffolder v1beta2 template demo publishing to MR on existing git repository
+  description: Scaffolder v1beta3 template demo publishing a Merge Request on existing GitLab repository
 spec:
   owner: backstage/techdocs-core
   type: service
@@ -24,10 +24,6 @@ spec:
           title: Description
           type: string
           description: Description of the component
-        gitlab_project:
-          title: Gitlab Project Slug or ID
-          type: string
-          description: 'Provide your Gitlab Project slug "gitlab-com/www-gitlab-com" or Project ID "7764"'
         targetPath:
           title: Target Path in repo
           type: string
@@ -36,6 +32,10 @@ spec:
           title: Destination Branch Name
           type: string
           description: Name of the branch to create in the repository
+        assignee:
+          title: MR Assignee
+          type: string
+          description: GitLab Handle of the Assignee
     - title: Choose a location
       required:
         - repoUrl
@@ -47,6 +47,8 @@ spec:
           ui:options:
             allowedHosts:
               - gitlab.com
+            requestUserCredentials:
+              secretsKey: USER_OAUTH_TOKEN
 
   steps:
     - id: template
@@ -62,16 +64,18 @@ spec:
       action: publish:gitlab:merge-request
       input:
         repoUrl: ${{ parameters.repoUrl }}
-        projectid: ${{ parameters.gitlab_project }}
         title: Creating catalog-info.yaml ${{ parameters.name }} for backstage
         branchName: ${{ parameters.branchName }}
         description: |
           # New project: ${{ parameters.name }}
-
           ${{ parameters.description if parameters.description }}
         targetPath: ${{ parameters.targetPath if parameters.targetPath else '.' }}
+        token: ${{ secrets.USER_OAUTH_TOKEN }}
+        commitAction: create
+        removeSourceBranch: true
+        assignee: ${{ parameters.assignee }}
 
   output:
     links: 
       - url: ${{ steps.publish.output.mergeRequestUrl }}
-        text: 'Go to Gitlab MR'
+        title: 'Go to Gitlab MR'
