@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: gitlab-merge-request
   title: GitLab Merge Request Action template
-  description: Scaffolder v1beta3 template demo publishing a Merge Request on existing GitLab repository
+  description: Scaffolder template demo publishing a Merge Request on existing GitLab repository
 spec:
   owner: backstage/techdocs-core
   type: service
