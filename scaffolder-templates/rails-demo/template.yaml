@@ -129,7 +129,7 @@ spec:
     - name: Write Catalog information
       action: catalog:write
       input:
-        component:
+        entity:
           apiVersion: 'backstage.io/v1alpha1'
           kind: Component
           metadata:
@@ -140,6 +140,7 @@ spec:
             type: service
             lifecycle: production
             owner: ${{ parameters.owner }}
+        filePath: 'catalog-info.yaml'
 
     - id: publish
       if: ${{ parameters.dryRun !== true }}
