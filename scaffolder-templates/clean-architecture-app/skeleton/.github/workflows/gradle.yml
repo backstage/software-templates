@@ -1,0 +1,38 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Initialize Java Project
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Set up JDK 11
+        uses: actions/setup-java@a18c333f3f14249953dab3e186e5e21bf3390f1d
+        with:
+          java-version: '11'
+          distribution: 'corretto'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      - name: Build project
+        run: gradle cleanArchitecture --name=${{ values.name }} --type=${{ values.projectType }} --package=${{ values.package }} --coverage=${{ values.coverage }} --lombok=${{ values.lombok }} --metrics=${{ values.metrics }} --language=JAVA --javaVersion=VERSION_17
+      - uses: stefanzweifel/git-auto-commit-action@6c32682a4040e023c054b2fc60a7cf65cc77f7ad
+        with:
+          commit_message: Building clean architecture project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
