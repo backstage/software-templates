@@ -71,4 +71,4 @@ spec:
   output:
     links:
       - url: ${{steps.publish.output.remoteUrl}}
-        text: "Go to PR"
+        title: "Go to PR"
