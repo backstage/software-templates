@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: software-templates
+  annotations:
+    github.com/project-slug: scaribei/software-templates
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
