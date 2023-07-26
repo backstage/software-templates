@@ -1,0 +1,36 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+metadata:
+  name: gitlab-repo-template
+  title: GitLab Repository Template
+  description: Creates a new GitLab repository from a template
+  tags:
+    - gitlab
+spec:
+  type: website
+  parameters:
+    - name: name
+      description: Unique name of the component
+      schema:
+        type: string
+    - name: description
+      description: Description of the component
+      schema:
+        type: string
+    - name: owner
+      description: Owner of the component
+      schema:
+        type: string
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:plain
+      input:
+        url: https://path-to-your-template.git  # Update this URL to point to your base template
+    - id: publish
+      name: Publish
+      action: publish:gitlab
+      input:
+        repoUrl: 'https://gitlab.com/${input.owner}/${input.name}'
+        auth:
+          token: ${{ secrets.USER_OAUTH_TOKEN }}
