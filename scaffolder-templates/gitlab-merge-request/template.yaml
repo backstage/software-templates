@@ -55,7 +55,7 @@ spec:
       name: Fetch Skeleton + Template
       action: fetch:template
       input:
-        url: ./template
+        url: ./skeleton
         targetPath: ${{ parameters.targetPath }}
         values:
           name: ${{parameters.name}}
