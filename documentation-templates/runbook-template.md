@@ -2,6 +2,8 @@
 
 # Runbook Title
 
+> **For instructions on formatting your content, see the <a href="https://idp.autodesk.com/docs/default/Location/idp-doc-manual/templates/">Write Your Doc</a> section of our Contribution Manual.**
+
 ## Summary
 
 Briefly describe your system, service, or project. If you're not sure what to write, try answering these questions:
