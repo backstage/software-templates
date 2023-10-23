@@ -1,5 +1,7 @@
 ## ${{ values.name }}
 
+> **For instructions on formatting your content, see the <a href="https://idp.autodesk.com/docs/default/Location/idp-doc-manual/templates/">Write Your Doc</a> section of our Contribution Manual.**
+
 ${{ values.description }}
 
 ## Getting started
