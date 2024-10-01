@@ -4,6 +4,9 @@ metadata:
   name: react-ssr-template
   title: React SSR Template
   description: Create a website powered with Next.js
+  actionbutton:
+    text: create
+  icon: nodejs
   tags:
     - recommended
     - react
