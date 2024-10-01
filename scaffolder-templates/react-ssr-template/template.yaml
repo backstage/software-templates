@@ -5,7 +5,7 @@ metadata:
   title: React SSR Template
   description: Create a website powered with Next.js
   actionbutton:
-    text: create
+    text: Create
   icon: nodejs
   tags:
     - recommended
